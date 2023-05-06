@@ -1,0 +1,29 @@
+
+spring:
+  application:
+    name: processor-demo
+
+  cloud:
+    stream:
+      bindings:
+        myConsumer-in-0:
+          destination: demo-topic
+          binder: kstream-consumer
+          group: processor-group
+      kafka:
+        streams:
+          binder:
+            brokers: localhost:9092
+
+      binders:
+        kstream:
+          type: kstream
+          environment:
+            spring.cloud.stream.kafka.streams.binder.brokers: localhost:9092
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include:
+          -bindings
